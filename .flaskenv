@@ -1,0 +1,2 @@
+FLASK_APP=moxart
+FLASK_DEBUG=1

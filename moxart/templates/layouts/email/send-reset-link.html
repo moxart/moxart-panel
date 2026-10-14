@@ -1,0 +1,22 @@
+{% extends 'layouts/email/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Hello, {{ username | capitalize }}!</h1>
+        <p>We heard that you lost your Moxart password.
+            Sorry about that! But don’t worry! Use the following token to reset your password.
+            It expires in 30 minutes and works only once.</p>
+        <pre>{{ token }}</pre>
+        <p>Send your new password to <code>POST {{ endpoint }}</code> with a JSON body like
+            <code>{"password": "your new password"}</code>.</p>
+        <br>
+        <p>Thanks, <br>
+        The Moxart</p>
+    </div>
+    <footer>
+        <div>
+            <p>&copy; Moxart. All rights reserved.</p>
+            <p>Powered by Moxart</p>
+        </div>
+    </footer>
+{% endblock %}

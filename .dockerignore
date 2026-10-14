@@ -1,0 +1,7 @@
+.git
+.env
+venv
+instance/config.py
+uploads
+**/__pycache__
+.pytest_cache

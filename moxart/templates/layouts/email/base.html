@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <title>Email Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <style>
+        html {
+            font-family: 'Lato', 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+        }
+
+        body {
+            background-color: #FFF8F0;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        * { box-sizing: border-box; }
+
+        p {
+
+        }
+
+        a {
+            color: #00B890;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            hyphens: auto;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus,
+        a:active {
+            color: #008f70
+        }
+
+        .container {
+            color: #555;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        }
+
+        .button-primary {
+            background: #00B890;
+            font-size: 18px;
+            line-height: 15px;
+            text-decoration: none;
+            padding: 20px 25px;
+            color: #ffffff;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .button-primary:hover,
+        .button-primary:focus,
+        .button-primary:active {
+            background: #008f70 !important;
+            border-color: #008f70 !important;
+            color: #fff !important;
+            border-radius: 4px !important;
+        }
+
+        footer {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+            text-align: center;
+            font-size: 13px;
+            color: #9B9BAB;
+            text-shadow: 0 1px 0 #fff;
+        }
+    </style>
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>

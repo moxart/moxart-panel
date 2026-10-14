@@ -1,0 +1,19 @@
+{% extends 'layouts/email/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Hello, {{ username | capitalize }}!</h1>
+        <p>Thanks for signing up. We're very excited to have you on board. To get started using Moxart, please confirm your account below.</p>
+        <a class="button button-primary" href="{{ link }}">Confirm Email</a>
+        <p>Button not working? Paste the following link into your browser: <a href="{{ link }}">{{ link }}</a></p>
+        <br>
+        <p>Thanks, <br>
+        The Moxart.</p>
+    </div>
+    <footer>
+        <div>
+            <p>&copy; Moxart. All rights reserved.</p>
+            <p>Powered by Moxart</p>
+        </div>
+    </footer>
+{% endblock %}

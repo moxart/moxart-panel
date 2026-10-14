@@ -1,0 +1,56 @@
+services:
+  db:
+    image: mysql:8.4.9
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # catches every email the app sends; read them at http://localhost:8025
+  mail:
+    image: axllent/mailpit:v1.27
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8025:8025"
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      mail:
+        condition: service_started
+    env_file: .env
+    environment:
+      MOXART_SQLALCHEMY_DATABASE_URI: mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db/${MYSQL_DATABASE}?charset=utf8mb4
+      MOXART_UPLOAD_BASE_PATH: /app/uploads
+      MOXART_MAIL_SERVER: mail
+      MOXART_MAIL_PORT: "1025"
+      MOXART_MAIL_USE_TLS: "false"
+      MOXART_MAIL_USE_SSL: "false"
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - uploads:/app/uploads
+    # healthy only once init-db has finished and gunicorn is serving
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/api/categories')"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  db-data:
+  uploads:
